@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
+#include <stdlib.h>
 #include "gravity.h"
+
 extern object objects[OBJECTS];
 
 void move(object *object)
@@ -21,6 +24,19 @@ void debugObject(object *object)
 	fprintf(stderr, "displaing object of size %d\n", object->size);
 	fprintf(stderr, "x: %f, y: %f\n", object->location.x, object->location.y);
 	fprintf(stderr, "dirx: %f, diry: %f\n", object->direction.x, object->direction.y);
+}
+
+void initializeObjects()
+{
+	srand(time(NULL));
+	for (int i = 0; i<OBJECTS; i++)
+	{
+		objects[i].size = (rand() % MAX_OBJECT_SIZE)+1; 	
+		objects[i].location.x = rand() % (VIEW_WIDTH +1);
+		objects[i].location.y = rand() % (VIEW_HEIGHT +1);
+		objects[i].direction.x = (rand() % (INITIAL_DIR_MAX-INITIAL_DIR_MIN +1))+INITIAL_DIR_MIN;
+		objects[i].direction.y = (rand() % (INITIAL_DIR_MAX-INITIAL_DIR_MIN +1))+INITIAL_DIR_MIN;
+	}
 }
 
 void recalculateVectors(object *object)

@@ -4,8 +4,9 @@
 #include "gravity.h"
 
 
-object object1 = { 10, {4,0}, {1,2}};
-object objects[] = { {100000, {0,0}, {0,0}}, {100005, {50, 50}, {0,0}}, {100003, {25, 40}, {0,0}}};
+// object object1 = { 10, {4,0}, {1,2}};
+// object objects[] = { {100000, {0,0}, {0,0}}, {100005, {50, 50}, {0,0}}, {100003, {25, 40}, {0,0}}};
+object objects[OBJECTS];
 
 void init2D(float r, float g, float b)
 {
@@ -41,13 +42,16 @@ void display()
 
 void main(int argc,char *argv[])
 {
-	freopen("log", "w", stderr);
+	// freopen("log", "w", stderr);
 	glutInit(&argc,argv);
 	glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize (1600, 800);
 	glutInitWindowPosition (100, 100);
-	glutCreateWindow ("points and lines");
+	glutCreateWindow ("GRAVITY");
 	init2D(0.0,0.0,0.0);
+
+	initializeObjects();
+
 	glutDisplayFunc(display);
 	glutIdleFunc(display);
 

@@ -1,6 +1,12 @@
 #include <stdio.h>
 #define G 6.67408E-11
-#define OBJECTS 3
+#define OBJECTS 50
+#define MAX_OBJECT_SIZE 1000000
+#define MIN_OBJECT_SIZE 1
+#define VIEW_WIDTH 1600
+#define VIEW_HEIGHT 800
+#define INITIAL_DIR_MAX 0
+#define INITIAL_DIR_MIN 0 
 
 struct point {
 	double x;
@@ -31,3 +37,4 @@ double vectorLength(struct vector vector);
 void test_vectorLength();
 void test_unitVector(float x, float y);
 struct vector unitVector(struct vector vector);
+void initializeObjects();

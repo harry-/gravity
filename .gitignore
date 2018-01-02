@@ -8,3 +8,5 @@ demo*
 test*
 gravity-graphics.c
 gravity-nographics.c
+*.swo
+*~
