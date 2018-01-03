@@ -32,8 +32,8 @@ void initializeObjects()
 	for (int i = 0; i<OBJECTS; i++)
 	{
 		objects[i].size = (rand() % MAX_OBJECT_SIZE)+1; 	
-		objects[i].location.x = rand() % (VIEW_WIDTH +1);
-		objects[i].location.y = rand() % (VIEW_HEIGHT +1);
+		objects[i].location.x = (rand() % (VIEW_WIDTH +1)) +SCREEN_WIDTH/2-VIEW_WIDTH/2;
+		objects[i].location.y = (rand() % (VIEW_HEIGHT +1)) + SCREEN_HEIGHT/2-VIEW_HEIGHT/2;
 		objects[i].direction.x = (rand() % (INITIAL_DIR_MAX-INITIAL_DIR_MIN +1))+INITIAL_DIR_MIN;
 		objects[i].direction.y = (rand() % (INITIAL_DIR_MAX-INITIAL_DIR_MIN +1))+INITIAL_DIR_MIN;
 	}
@@ -74,19 +74,35 @@ double recalculateVector(object *object1, object *object2)
 struct vector attractionVector(object *obj1, object *obj2)
 {
 	struct vector vector;
+
+	#ifdef DEBUG
 	fprintf (stderr, "calculating attaction vector for the following objects:\n");
 	debugObject(obj1);
 	debugObject(obj2);
 	fprintf(stderr, "distance between these objects: %f\n", distance(obj1, obj2));
+	#endif
+
 	vector.x = obj2->location.x - obj1->location.x;
 	vector.y = obj2->location.y - obj1->location.y;
+
+	#ifdef DEBUG
 	fprintf(stderr, "before unit vectorization: %f, %f\n", vector.x, vector.y);
+	#endif
+
 	vector = unitVector(vector);
 	double gforce = force(obj1, obj2);
+
+	#ifdef DEBUG
 	fprintf(stderr, "before force multiplication: %f, %f\n", vector.x, vector.y);
+	#endif
+
 	vector.x *= gforce;
 	vector.y *= gforce; 
+
+	#ifdef DEBUG
 	fprintf(stderr, "attV x: %f, y: %f\n", vector.x, vector.y);
+	#endif
+
 	return vector;
 }
 

@@ -25,7 +25,7 @@ void display()
 		recalculateVectors(&objects[i]);	
 	//	collisions(&objects[i]);
 		move(&objects[i]);
-		displayObject(&objects[i]);
+	//	displayObject(&objects[i]);
 
 		glBegin(GL_POINTS);
 			glVertex2i(objects[i].location.x,objects[i].location.y);

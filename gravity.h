@@ -1,10 +1,31 @@
 #include <stdio.h>
 #define G 6.67408E-11
+
+//#define DEBUG
+
+#define SMALL
+//#define LARGE
+
+#ifdef LARGE
 #define OBJECTS 50
 #define MAX_OBJECT_SIZE 1000000
 #define MIN_OBJECT_SIZE 1
 #define VIEW_WIDTH 1600
 #define VIEW_HEIGHT 800
+#define SCREEN_WIDTH 1600
+#define SCREEN_HEIGHT 800
+#endif
+
+#ifdef SMALL
+#define OBJECTS 200
+#define MAX_OBJECT_SIZE 100000000
+#define MIN_OBJECT_SIZE 80000000
+#define VIEW_WIDTH 100
+#define VIEW_HEIGHT 100
+#define SCREEN_WIDTH 1600
+#define SCREEN_HEIGHT 800
+#endif
+
 #define INITIAL_DIR_MAX 0
 #define INITIAL_DIR_MIN 0 
 #define COLLISION_DISTANCE 1
