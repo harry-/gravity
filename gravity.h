@@ -7,6 +7,7 @@
 #define VIEW_HEIGHT 800
 #define INITIAL_DIR_MAX 0
 #define INITIAL_DIR_MIN 0 
+#define COLLISION_DISTANCE 1
 
 struct point {
 	double x;
@@ -38,3 +39,5 @@ void test_vectorLength();
 void test_unitVector(float x, float y);
 struct vector unitVector(struct vector vector);
 void initializeObjects();
+void collisions(object *object);
+

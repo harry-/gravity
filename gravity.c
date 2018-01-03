@@ -14,14 +14,14 @@ void move(object *object)
 
 void displayObject(object *object)
 {
-	printf("displaing object of size %d\n", object->size);
+	printf("displaying object of size %d\n", object->size);
 	printf("x: %f, y: %f\n", object->location.x, object->location.y);
 	printf("dirx: %f, diry: %f\n", object->direction.x, object->direction.y);
 }
 
 void debugObject(object *object)
 {
-	fprintf(stderr, "displaing object of size %d\n", object->size);
+	fprintf(stderr, "displaying object of size %d\n", object->size);
 	fprintf(stderr, "x: %f, y: %f\n", object->location.x, object->location.y);
 	fprintf(stderr, "dirx: %f, diry: %f\n", object->direction.x, object->direction.y);
 }
@@ -43,10 +43,24 @@ void recalculateVectors(object *object)
 {
 	for (char i = 0; i<OBJECTS;i++)
 	{
-		if(object->location.x==objects[i].location.x&&object->location.y==objects[i].location.y)
+		/* collisions are dealt with seperately 
+		   and this also prevents the object attracting itself, hopefully */
+		if (distance(object, &objects[i]) < COLLISION_DISTANCE ) 
 			continue;
 		recalculateVector(object, &objects[i]);
-		fprintf(stderr, "object index %d\n", i);
+	}
+}
+
+void collisions(object *object)
+{
+	for (char i = 0; i<OBJECTS;i++)
+	{
+		/* keep the object from colliding with itself */
+		if (distance(object, &objects[i]) == 0 )
+			continue;
+		/* objects that are far apart, dont collide */
+		if (distance(object, &objects[i]) >= COLLISION_DISTANCE)
+			continue;
 	}
 }
 
@@ -63,6 +77,7 @@ struct vector attractionVector(object *obj1, object *obj2)
 	fprintf (stderr, "calculating attaction vector for the following objects:\n");
 	debugObject(obj1);
 	debugObject(obj2);
+	fprintf(stderr, "distance between these objects: %f\n", distance(obj1, obj2));
 	vector.x = obj2->location.x - obj1->location.x;
 	vector.y = obj2->location.y - obj1->location.y;
 	fprintf(stderr, "before unit vectorization: %f, %f\n", vector.x, vector.y);

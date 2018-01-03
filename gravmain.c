@@ -23,6 +23,7 @@ void display()
 	for(char i = 0; i<OBJECTS ;i++)
 	{
 		recalculateVectors(&objects[i]);	
+	//	collisions(&objects[i]);
 		move(&objects[i]);
 		displayObject(&objects[i]);
 
