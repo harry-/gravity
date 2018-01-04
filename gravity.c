@@ -94,6 +94,7 @@ struct vector attractionVector(object *obj1, object *obj2)
 
 	#ifdef DEBUG
 	fprintf(stderr, "before force multiplication: %f, %f\n", vector.x, vector.y);
+	fprintf(stderr, "force: %f\n", gforce);
 	#endif
 
 	vector.x *= gforce;
@@ -115,18 +116,6 @@ struct vector unitVector(struct vector vector)
 	return unitVector;
 }
 
-void test_unitVector(float x, float y)
-{
-	struct vector vector = {x,y};
-	struct vector uVector = unitVector(vector);
-	printf("the unit vector of %f, %f is: %f, %f\n", x, y, uVector.x, uVector.y);
-}
-void test_vectorLength()
-{
-	struct vector vector = {3,4};
-	printf("length of vector 3,4: %f\n", vectorLength(vector));
-}
-
 double vectorLength(struct vector vector)
 {
 	double length = sqrt(pow(vector.x,2)+pow(vector.y,2));
@@ -145,17 +134,24 @@ double force (object *obj1, object *obj2)
 	return force;
 }
 
-
-void test_distance()
+struct vector vectorAB(object *obj1, object *obj2)
 {
-	object obj1 = {10, {1,1}, {0,0}};
-	object obj2 = {10, {4,5}, {0,0}};
-	printf("distance between 0,0 and 3,4: %f\n", distance(&obj1, &obj2));
+	struct vector vectorAB;
+	vectorAB.x = obj2->location.x-obj1->location.x;
+	vectorAB.y = obj2->location.y-obj1->location.y;
+	return vectorAB;
 }
 
-void test_force()
+char* printPoint (struct point *point)
 {
-	object obj1 = {100000, {1,1}, {0,0}};
-	object obj2 = {100000, {4,5}, {0,0}};
-	printf("force between 0,0 and 3,4: %.20f\n", force(&obj1, &obj2));
+	static char output[MAX_COORD_DIGITS*2+10];
+	sprintf(output, "%.2f, %.2f", point->x, point->y);
+	return output;
+}
+
+char* printVector (struct vector *vector)
+{
+	static char output[MAX_COORD_DIGITS*2+10];
+	sprintf(output , "%.2f, %.2f", vector->x, vector->y);
+	return output; 
 }

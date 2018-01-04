@@ -1,9 +1,8 @@
 #include <stdio.h>
 #define G 6.67408E-11
 
-//#define DEBUG
-
-#define SMALL
+#define DEBUG 2
+//#define SMALL
 //#define LARGE
 
 #ifdef LARGE
@@ -14,16 +13,29 @@
 #define VIEW_HEIGHT 800
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 800
+#define MAX_COORD_DIGITS 5
 #endif
 
 #ifdef SMALL
-#define OBJECTS 200
+#define OBJECTS 3 
 #define MAX_OBJECT_SIZE 100000000
-#define MIN_OBJECT_SIZE 80000000
-#define VIEW_WIDTH 100
-#define VIEW_HEIGHT 100
+#define MIN_OBJECT_SIZE 80000
+#define VIEW_WIDTH 25
+#define VIEW_HEIGHT 25
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 800
+#define MAX_COORD_DIGITS 5
+#endif
+
+#ifdef DEBUG
+#define OBJECTS 2
+#define MAX_OBJECT_SIZE 1000000
+#define MIN_OBJECT_SIZE 800000
+#define VIEW_WIDTH 25
+#define VIEW_HEIGHT 25
+#define SCREEN_WIDTH 1600
+#define SCREEN_HEIGHT 800
+#define MAX_COORD_DIGITS 5
 #endif
 
 #define INITIAL_DIR_MAX 0
@@ -61,4 +73,8 @@ void test_unitVector(float x, float y);
 struct vector unitVector(struct vector vector);
 void initializeObjects();
 void collisions(object *object);
-
+struct vector vectorAB(object *obj1, object *obj2);
+char* printPoint (struct point *point);
+char* printVector (struct vector *vector);
+void test_vectorCalculations();
+char* printPointB (struct point *point);
