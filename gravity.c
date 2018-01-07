@@ -8,8 +8,8 @@ extern object objects[OBJECTS];
 
 void move(object *object)
 {
-	object->location.x += object->direction.x;
-	object->location.y += object->direction.y;
+	object->location.x += object->direction.x * SPEED;
+	object->location.y += object->direction.y * SPEED;
 }
 
 void displayObject(object *object)
@@ -51,8 +51,9 @@ void recalculateVectors(object *object)
 	}
 }
 
-void collisions(object *object)
+char collisions(object *object)
 {
+	char collisionFlag = 0;
 	for (char i = 0; i<OBJECTS;i++)
 	{
 		/* keep the object from colliding with itself */
@@ -61,7 +62,31 @@ void collisions(object *object)
 		/* objects that are far apart, dont collide */
 		if (distance(object, &objects[i]) >= COLLISION_DISTANCE)
 			continue;
+		collisionFlag = 1;
+		if  (distance(object, &objects[i]) <= 0.5)
+		collision(object, &objects[i]);	
 	}
+	return collisionFlag;
+}
+
+void collision(object *obj1, object *obj2)
+{
+	int newSize = obj1->size + obj2->size;
+	struct vector newDirection = weightedVectorAddition(obj1->direction, obj1->size, obj2->direction, obj2->size);
+
+	obj1->size = newSize;
+	obj1->direction = newDirection; 	
+
+	obj2->size = 0;
+}
+
+struct vector weightedVectorAddition(struct vector v1, int weight1, struct vector v2, int weight2)
+{
+	struct vector v;
+	long weight = weight1 + weight2;
+	v.x = v1.x*(weight1/weight) + v2.x*(weight2/weight) ;
+	v.y = v1.y*(weight1/weight) + v2.y*(weight2/weight) ;
+	return v;
 }
 
 double recalculateVector(object *object1, object *object2)

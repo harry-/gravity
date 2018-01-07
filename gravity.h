@@ -1,27 +1,30 @@
 #include <stdio.h>
 #define G 6.67408E-11
+#define SPEED 1000
 
-#define DEBUG 2
-//#define SMALL
+//#define DEBUG 0
+#define SMALL
 //#define LARGE
 
 #ifdef LARGE
-#define OBJECTS 50
-#define MAX_OBJECT_SIZE 1000000
-#define MIN_OBJECT_SIZE 1
-#define VIEW_WIDTH 1600
-#define VIEW_HEIGHT 800
+#define OBJECTS 50 
+#define MAX_OBJECT_SIZE 10000
+#define MIN_OBJECT_SIZE 1 
+#define VIEW_WIDTH 800
+#define VIEW_HEIGHT 400
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 800
 #define MAX_COORD_DIGITS 5
+#define TRACING
 #endif
 
 #ifdef SMALL
+#define TRACING
 #define OBJECTS 3 
-#define MAX_OBJECT_SIZE 100000000
-#define MIN_OBJECT_SIZE 80000
-#define VIEW_WIDTH 25
-#define VIEW_HEIGHT 25
+#define MAX_OBJECT_SIZE 10000
+#define MIN_OBJECT_SIZE 10000
+#define VIEW_WIDTH 100
+#define VIEW_HEIGHT 100
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 800
 #define MAX_COORD_DIGITS 5
@@ -40,7 +43,7 @@
 
 #define INITIAL_DIR_MAX 0
 #define INITIAL_DIR_MIN 0 
-#define COLLISION_DISTANCE 1
+#define COLLISION_DISTANCE 20
 
 struct point {
 	double x;
@@ -72,9 +75,11 @@ void test_vectorLength();
 void test_unitVector(float x, float y);
 struct vector unitVector(struct vector vector);
 void initializeObjects();
-void collisions(object *object);
+char collisions(object *object);
 struct vector vectorAB(object *obj1, object *obj2);
 char* printPoint (struct point *point);
 char* printVector (struct vector *vector);
 void test_vectorCalculations();
 char* printPointB (struct point *point);
+void collision(object *obj1, object *obj2);
+struct vector weightedVectorAddition(struct vector vector1, int weight1, struct vector vector2, int weight2);

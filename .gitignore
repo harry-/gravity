@@ -10,3 +10,4 @@ gravity-graphics.c
 gravity-nographics.c
 *.swo
 *~
+*.swn

@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <stdio.h>
 #include "gravity.h"
+char tracing = 1;
 
 #if (DEBUG == 2)
 /* object objects[] =	{{100000, {1,5}, {0,0}}, 
@@ -21,16 +22,26 @@ void init2D(float r, float g, float b)
 
 void oneStepInTime()
 {
-	//glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
-
+	if (!tracing)
+		glClear(GL_COLOR_BUFFER_BIT);
+	
 	for(char i = 0; i<OBJECTS ;i++)
 	{
-		recalculateVectors(&objects[i]);	
-	//	collisions(&objects[i]);
+		if (objects[i].size == 0)
+			continue;
+		char collision = 0;
+		glColor3f(1.0, 0.0, 0.0);
+		recalculateVectors(&objects[i]);
+		collision = collisions(&objects[i]);
 		move(&objects[i]);
 	//	displayObject(&objects[i]);
 
+//		if (objects[i].size > MAX_OBJECT_SIZE -(MAX_OBJECT_SIZE-MIN_OBJECT_SIZE)*0.75)
+//			glColor3f(1.0, 0.0, 0.0);
+//		if(i == 1)
+//			glColor3f(0.0, 1.0, 0.0);
+		if(collision)
+			glColor3f(1.0, 1.0, 1.0);
 		glBegin(GL_POINTS);
 			glVertex2i(objects[i].location.x,objects[i].location.y);
 		glEnd();
@@ -46,6 +57,13 @@ void display()
 
 void anyKey(unsigned char key, int x, int y)
 {
+	extern char tracing;
+	if (key == 't')
+	{
+		printf("%d", tracing);
+		tracing ^= 1;
+		printf("%d", tracing);
+	}
 	oneStepInTime();
 }
 
@@ -65,8 +83,9 @@ void main(int argc,char *argv[])
 
 	glutKeyboardFunc(anyKey);
 	glutDisplayFunc(display);
-//	glutIdleFunc(display);
-	
+	#ifndef DEBUG
+	glutIdleFunc(display);
+	#endif	
 	glutMainLoop();
 }
 
