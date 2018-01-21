@@ -3,15 +3,15 @@
 #define SPEED 1000
 
 //#define DEBUG 0
-#define SMALL
-//#define LARGE
+// #define SMALL
+#define LARGE
 
 #ifdef LARGE
 #define OBJECTS 50 
 #define MAX_OBJECT_SIZE 10000
 #define MIN_OBJECT_SIZE 1 
-#define VIEW_WIDTH 800
-#define VIEW_HEIGHT 400
+#define VIEW_WIDTH 1500
+#define VIEW_HEIGHT 900
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 800
 #define MAX_COORD_DIGITS 5
@@ -43,7 +43,7 @@
 
 #define INITIAL_DIR_MAX 0
 #define INITIAL_DIR_MIN 0 
-#define COLLISION_DISTANCE 20
+#define COLLISION_DISTANCE 5
 
 struct point {
 	double x;
