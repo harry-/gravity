@@ -2,6 +2,12 @@
 #define G 6.67408E-11
 #define SPEED 1000
 
+#define LINUX 1
+#define WINDOWS 2 
+
+/* SYSTEM must be either windows or linux */
+#define SYSTEM WINDOWS
+
 //#define DEBUG 0
 // #define SMALL
 #define LARGE

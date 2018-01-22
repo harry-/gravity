@@ -1,6 +1,15 @@
-#include <GL/glut.h>
+
 #include <stdio.h>
 #include "gravity.h"
+
+#if SYSTEM == WINDOWS
+#include "glut.h"
+#elif SYSTEM == LINUX
+#include <GL/glut.h>
+#endif
+
+
+
 char tracing = 1;
 
 #if (DEBUG == 2)

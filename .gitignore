@@ -11,3 +11,9 @@ gravity-nographics.c
 *.swo
 *~
 *.swn
+*.exe
+*.obj
+*.def
+*.ilk
+*.iobj
+*.ipdb
