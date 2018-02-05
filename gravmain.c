@@ -4,6 +4,7 @@
 
 #if SYSTEM == WINDOWS
 #include "glut.h"
+#pragma warning(disable : 4996)
 #elif SYSTEM == LINUX
 #include <GL/glut.h>
 #endif
@@ -85,6 +86,7 @@ void main(int argc,char *argv[])
 	glutInitWindowPosition (100, 100);
 	glutCreateWindow ("GRAVITY");
 	init2D(0.0,0.0,0.0);
+	glutFullScreen();
 	
 	#if (DEBUG != 2)
 	initializeObjects();

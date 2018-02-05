@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include "gravity.h"
 
+#pragma warning(disable : 4996)
+
+_Bool mybool = 1;
+
 extern object objects[OBJECTS];
 
 void move(object *object)
