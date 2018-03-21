@@ -17,3 +17,4 @@ gravity-nographics.c
 *.ilk
 *.iobj
 *.ipdb
+*.pdb

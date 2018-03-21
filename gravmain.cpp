@@ -27,7 +27,7 @@ void init2D(float r, float g, float b)
 {
 	glClearColor(r,g,b,0.0);  
 	glMatrixMode (GL_PROJECTION);
-	gluOrtho2D (0.0, 1600.0, 0.0, 800.0);
+	gluOrtho2D (0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT);
 }
 
 void oneStepInTime()
@@ -82,11 +82,11 @@ void main(int argc,char *argv[])
 	freopen("log", "w", stderr);
 	glutInit(&argc,argv);
 	glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize (1600, 800);
-	glutInitWindowPosition (100, 100);
+	glutInitWindowSize (SCREEN_WIDTH, SCREEN_HEIGHT);
+	glutInitWindowPosition (0, 0);
 	glutCreateWindow ("GRAVITY");
 	init2D(0.0,0.0,0.0);
-	glutFullScreen();
+	//glutFullScreen();
 	
 	#if (DEBUG != 2)
 	initializeObjects();

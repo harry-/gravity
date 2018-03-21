@@ -93,7 +93,7 @@ struct vector weightedVectorAddition(struct vector v1, int weight1, struct vecto
 	return v;
 }
 
-double recalculateVector(object *object1, object *object2)
+void recalculateVector(object *object1, object *object2)
 {
 	struct vector attVector = attractionVector(object1, object2);
 	object1->direction.x += attVector.x;
@@ -159,7 +159,7 @@ double distance (object *obj1, object *obj2)
 
 double force (object *obj1, object *obj2)
 {
-	double force = G*((obj1->size*obj2->size)/pow(distance(obj1, obj2),2));
+	double force = G*(((long long)obj1->size*obj2->size)/pow(distance(obj1, obj2),2));
 	return force;
 }
 

@@ -4,9 +4,20 @@
 
 #define LINUX 1
 #define WINDOWS 2 
+#define C 1
+#define CPP 2
+
+
 
 /* SYSTEM must be either windows or linux */
 #define SYSTEM WINDOWS
+#define LANGUAGE CPP
+
+#if LANGUAGE == CPP
+
+using _Bool = bool;
+
+#endif
 
 //#define DEBUG 0
 // #define SMALL
@@ -18,8 +29,8 @@
 #define MIN_OBJECT_SIZE 1 
 #define VIEW_WIDTH 1500
 #define VIEW_HEIGHT 900
-#define SCREEN_WIDTH 1600
-#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
 #define MAX_COORD_DIGITS 5
 #define TRACING
 #endif
@@ -72,7 +83,7 @@ void displayObject(object *object);
 void recalculateVectors(object *object);
 double distance(object *obj1, object *obj2);
 double force (object *obj1, object *obj2);
-double recalculateVector(object *object1, object *object2);
+void recalculateVector(object *object1, object *object2);
 void test_force();
 void test_distance();
 struct vector attractionVector(object *obj1, object *obj2);
